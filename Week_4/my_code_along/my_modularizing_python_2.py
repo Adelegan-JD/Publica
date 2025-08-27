@@ -75,8 +75,14 @@ print(e)
 # source virtual_environment_name/bin/activate # linux or macOS
 #'''
 
-# To deactivate
+# To deactivate the virtual environment, just type "deactivate" in the command line.
 
+# SAVING AND SHARING REQUIREMENTS
+# To freeze the installed packages into a file, use: "pip freeze > requirements.txt"
+
+# To install the requiremnts at a later time, use:  "pip install -r requirements.txt"
+
+# CREATING MY OWN PACKAGE
 
 
 
