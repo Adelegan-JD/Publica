@@ -54,7 +54,7 @@ print(onisemo.buy_airtime(500))
 print(abeeb.airtime)
 print(onisemo.airtime)
 
-
+# Defining the attributes of a student
 class Student:
     def __init__(self, name, course, level, state_of_origin):
         self.name = name
@@ -62,3 +62,53 @@ class Student:
         self.level = level
         self.state_of_origin = state_of_origin
         self.cgpa = 0.0
+
+# Creating a studentt object
+Fathia = Student("Fathia Abdul", "Biochemistry", 400, "Ogun State")
+
+# Accessing Attributes
+print(Fathia.name)
+print(Fathia.course)
+print(Fathia.level)
+print(Fathia.state_of_origin)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
