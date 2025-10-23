@@ -30,10 +30,10 @@ def SignUp(input: Simple):
         salt = bcrypt.gensalt()
         hashedPassword = bcrypt.hashpw(input.password.encode('utf-8'), salt)
         print(hashedPassword)
-        db.execute(query, {"name": input.name, "email": input.email, "password": input.password})
+        db.execute(query, {"name": input.name, "email": input.email, "password": hashedPassword})
         db.commit()
 
-        return{"Message": "User details uploaded successfully", "data": {"name": input.name}, "email", input.email}
+        return{"Message": "User details uploaded successfully", "data": {"name": input.name}, "email": input.email}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail = e)

@@ -31,14 +31,12 @@ def Signup(input:Simple):
     try:
 
         duplicate_query = text("""
-            INSERT INTO users (name, email, password)
-            VALUES(:name, :email, :password)
+            SELECT * FROM users WHERE email = :email""")
 
-        existing = db.execute(duplicate_entry, {"email": input.email})
+        existing = db.execute(duplicate_query, {"email": input.email})
         if existing:
-            print("Email already exists!")
+            result("Email already exists!")
 
-        """)       
 
 
         query = text("""
