@@ -45,5 +45,5 @@ level VARCHAR(100) NOT NULL
 );
 """)
 
-db.execute(create_table_query)
+db.execute(create_users)
 
