@@ -6,6 +6,7 @@ import os
 load_dotenv()
 
 app = FastAPI(title='Simple FastAPI App', description= 'This is my first API app', version='1.0.0')
+
 data = [{'name': 'Adelegan Deborah', 'track': 'AI Engineering', 'age': 20}, 
 {'name': 'Adelegan Abigail', 'track': 'Blockchain Developer', 'age': 21},
 {'name': 'Adelegan Esther', 'track': '3D Specialist', 'age': 22}]

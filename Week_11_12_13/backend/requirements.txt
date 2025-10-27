@@ -1,0 +1,13 @@
+fastapi
+pydantic
+uvicorn
+dotenv
+env
+SQLAlchemy
+pymysql
+pandas
+cryptography
+bcrypt
+psycopg2-binary
+PyJWT
+alembic
