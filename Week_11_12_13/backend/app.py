@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import uvicorn
 import os
 load_dotenv()
+from database import db
 
 app = FastAPI(title='Simple FastAPI App', description= 'This is my first API app', version='1.0.0')
 
