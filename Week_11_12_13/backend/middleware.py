@@ -25,7 +25,7 @@ def verify_token(request:HTTPAuthorizationCredentials = Depends(bearer)):
     #payload = Request.headers.get('Authorization)
     #token = payload.split(" ")[1]
 
-    token = request.redentials
+    token = request.credentials
 
     verified_token= jwt.decode(token, secret_key, algorithms=['HS256'])
 

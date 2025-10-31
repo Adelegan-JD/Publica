@@ -15,14 +15,15 @@ from middleware import create_token, verify_token
 load_dotenv()
 
 
-app = FastAPI(title= "User Management App", version = "1.0.0")
+app = FastAPI(title= "Student Management App", version = "1.0.0")
 
 
 class Simple(BaseModel):
-    Name: str = Field(..., examples= ["Deborah Adelegan"])
+    name: str = Field(..., examples= ["Deborah Adelegan"])
     email: str = Field(..., examples=["deborah@gmail.com"])
     password: str = Field(..., examples= ["ade123"])
     usertype: str = Field(..., examples= ['student'])
+    gender: str =  Field(..., examples= ['female'])
 
 class Login(BaseModel):
     email: str = Field(..., examples=["deborah@gmail.com"])
@@ -37,40 +38,43 @@ def Signup(input:Simple):
     try:
 
         duplicate_query = text("""
-            SELECT * FROM users WHERE email = :email""")
+            SELECT * FROM user WHERE email = :email""")
 
-        existing = db.execute(duplicate_query, {"email": input.email}.fetchone())
+        existing = db.execute(duplicate_query, {"email": input.email}).fetchone()
         if existing:
             return HTTPException(status_code=400, detail= "Email already exists!")
 
 
 
         query = text("""
-            INSERT INTO users(name, email, password)
-            VALUES(:name, :email, :password)
+            INSERT INTO user(name, email, password, gender, usertype)
+            VALUES(:name, :email, :password, :gender, :usertype)
                                """)
         
 
-        salt= bcrypt.gen_salt()
+        salt= bcrypt.gensalt()
         hashedPassword = bcrypt.hashpw(input.password.encode('utf-8'), salt)
 
-        try:
-            db.execute(query, {"name": input.name, "email":input.email, "password":hashedPassword, 'usertype':input.usertype})
-            db.commit()
-            return ({'message': 'User created successfully'})
-        except:
-            db.rollback()
-        finally:
-            db.close()
+        
+        db.execute(query, {"name": input.name, "email":input.email, "password":hashedPassword, "gender":input.gender, 'usertype':input.usertype})
+        db.commit()
+        return {'message': 'User created successfully', "data":{"name": input.name, "email":input.email}}
+    
 
     except Exception as e:
-        raise HTTPException(status=500, detail= str(e))
+
+        raise HTTPException(status_code=500, detail= str(e))
     
+@app.get('/')
+def root():
+    return {'message': 'Welcome to the Student Management App'}
+
+
 @app.post('/login')
 def login(input:Login):
     try:
-        query = text("SELECT * FROM users WHERE email = :email")
-        user = db.execute(query, {"email": input.email}.fetchone())
+        query = text("SELECT * FROM user WHERE email = :email")
+        user = db.execute(query, {"email": input.email}).fetchone()
 
         if not user:
             raise HTTPException(status_code=401, detail= 'Invalid Password')

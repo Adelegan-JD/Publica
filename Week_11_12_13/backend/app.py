@@ -14,9 +14,9 @@ data = [{'name': 'Adelegan Deborah', 'track': 'AI Engineering', 'age': 20},
 
 
 class item(BaseModel):
-    name : str = Field(..., examples= 'Perpetual')
-    track: str = Field(..., examples= 'Tech track')
-    age: int = Field(..., examples= 12)
+    name : str = Field(..., example= 'Perpetual')
+    track: str = Field(..., example= 'Tech track')
+    age: int = Field(..., example= 12)
 
 
 
